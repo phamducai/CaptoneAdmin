@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <!-- font aswsome -->
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#"
+            >Danh sách sản phẩm</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Danh sách người dùng</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Thống kê</a>
+        </li>
+      </ul>
+
+      <br />
+      <div class="row">
+        <div class="col-8">
+          <button
+            type="button"
+            class="btn btn-success"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            Add Item
+          </button>
+        </div>
+        <div class="col-4">
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search"
+              aria-label="Recipient's username"
+              aria-describedby="basic-addon2"
+              onchange="searchItem()"
+              id="seachItemInProducts"
+            />
+            <span class="input-group-text" id="basic-addon2"
+              ><i class="fa-solid fa-magnifying-glass"></i
+            ></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- table -->
+      <table class="table table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col" class="text-center">STT</th>
+            <th scope="col" class="text-center">Tên Sản Phẩm</th>
+            <th scope="col" class="text-center">Giá</th>
+            <th scope="col" class="text-center">Hình Ảnh</th>
+            <th scope="col" class="text-center">Mô Tả</th>
+            <th scope="col" class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider" id="renderTable"></tbody>
+      </table>
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Modal title
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label>Tên Sản Phẩm</label>
+                <input
+                  id="itemName"
+                  class="form-control"
+                  placeholder="Nhập vào tên sản phẩm"
+                />
+                <span id="postName"></span>
+              </div>
+              <div class="form-group">
+                <label>Giá</label>
+                <input
+                  id="itemPrice"
+                  class="form-control"
+                  placeholder="Nhập vào giá $"
+                />
+                <span id="postPrice"></span>
+              </div>
+              <div class="form-group">
+                <label>Màn hình</label>
+                <input
+                  id="itemScreen"
+                  class="form-control"
+                  placeholder="Nhập vào Màn hình "
+                />
+                <span id="postScreen"></span>
+              </div>
+              <div class="form-group">
+                <label> Back Camera </label>
+                <input
+                  id="itemBackCamera"
+                  class="form-control"
+                  placeholder="Nhập vào thông số BackCamera"
+                />
+                <span id="postBackCamera"></span>
+              </div>
+              <div class="form-group">
+                <label> Front Camera </label>
+                <input
+                  id="itemFrontCamera"
+                  class="form-control"
+                  placeholder="Nhập vào thông số FrontCamera"
+                />
+                <span id="postFrontCamera"></span>
+              </div>
+              <div class="form-group">
+                <label>Hình Ảnh</label>
+                <input
+                  id="itemImg"
+                  class="form-control"
+                  placeholder="Nhập vào hình sản phẩm"
+                />
+                <span id="postImg"></span>
+              </div>
+
+              <div class="form-group">
+                <label>Type</label>
+                <input
+                  id="itemType"
+                  class="form-control"
+                  placeholder="Nhập vào loại sản phẩm "
+                />
+                <span id="postType"> </span>
+              </div>
+              <div class="form-group">
+                <label>Mô tả</label>
+                <textarea
+                  class="form-control"
+                  name=""
+                  id="itemDesc"
+                  cols="30"
+                  rows="4"
+                  placeholder="Nhập vào mô tả"
+                ></textarea>
+                <span id="postDesc"></span>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+                id="closePost"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="saveChange()"
+              >
+                Save changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modalupdate -->
+    <div
+      class="modal fade"
+      id="uModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabels"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5 text-center" id="exampleModalLabels">
+              Update Product
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div id="renderModal"></div>
+        </div>
+      </div>
+    </div>
+    <!-- axios -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"
+      integrity="sha512-0qU9M9jfqPw6FKkPafM3gy2CBAvUWnYVOfNPDYKVuRTel1PrciTj+a9P3loJB+j0QmN2Y0JYQmkBBS8W+mbezg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- JavaScript Bundle with Popper -->
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./modal/Product.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
